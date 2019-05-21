@@ -5,8 +5,14 @@ from difflib import get_close_matches
 data = json.load(open("data.json"))
 def meaning(w):
     w = w.lower()
+    for i in data.keys():
+        i=i.lower()
     if w in data:
         return  data[w]
+    elif w.title() in data:
+        return data[w.title()]
+    elif w.upper() in data:
+        return data[w.upper()]
     elif len(get_close_matches(w,data.keys()))>0:
         for i in range(0,3):
             a = input("Did you mean %s instead? Y / N: " % get_close_matches(w,data.keys())[i])
